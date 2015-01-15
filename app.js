@@ -4,49 +4,26 @@ var express    = require("express");
 var bodyParser = require("body-parser");
 
 // Create and configure an express app
-var app        = express();
+var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Configre port  
-var port = process.env.PORT || 8080;      
+// Configure port
+var port = process.env.PORT || 8080;
 app.listen(port);
+console.log('Express server listening on port :'+port);
 
 // Create a base route
-var router = express.Router();
-var rootURL = process.env.rootURL || '/api';
-app.use(rootURL, router);
+var routes  = require('./app/routes');
+app.use('/', routes);
 
-console.log("Listening on url : " + rootURL + "/" + port)
+// view configuration
+app.set('views','public/views');
+app.set('view engine', 'jade');
 
-// Add a requrest handler
-router.get('/', function(req, res) {
-  res.json({ message: 'geeksaint.com API!' });   
-});
+//Directory for static files
+app.use(express.static('./public'));
 
-// /*  ***************** DB config ***************  */
-// var mongoose   = require('mongoose');
+//Setup chat server
+var chatServer = require('./app/chat/chat-server')(app, 3000);
 
-// mongoose.connect('mongodb://localhost:27017/gsb_dev'); 
-
-// //Test db connection
-// var Bear     = require('./app/models/bear');
-
-// router.route("/bears")
-//   .get(function(req, res) {
-//     res.json({
-//       message: 'here is your bear'
-//     });
-//   })
-//   .post(function(req, res){
-//   var bear = new Bear();
-//   bear.name = req.body.name;
-  
-//   bear.save(function(err) {
-//     if(err){
-//         res.send(err);
-//     }
-//     res.json({ message: 'Bear created! with name: ' + bear.name });
-//   });
-  
-// });
