@@ -24,28 +24,29 @@ router.get('/', function(req, res) {
   res.json({ message: 'geeksaint.com API!' });   
 });
 
-/*  ***************** DB config ***************  */
-var mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/gsb_dev'); 
+// /*  ***************** DB config ***************  */
+// var mongoose   = require('mongoose');
 
-//Test db connection
-var Bear     = require('./app/models/bear');
+// mongoose.connect('mongodb://localhost:27017/gsb_dev'); 
 
-router.route("/bears")
-  .get(function(req, res) {
-    res.json({
-      message: 'here is your bear'
-    });
-  })
-  .post(function(req, res){
-  var bear = new Bear();
-  bear.name = req.body.name;
+// //Test db connection
+// var Bear     = require('./app/models/bear');
+
+// router.route("/bears")
+//   .get(function(req, res) {
+//     res.json({
+//       message: 'here is your bear'
+//     });
+//   })
+//   .post(function(req, res){
+//   var bear = new Bear();
+//   bear.name = req.body.name;
   
-  bear.save(function(err) {
-    if(err){
-        res.send(err);
-    }
-    res.json({ message: 'Bear created! with name: ' + bear.name });
-  });
+//   bear.save(function(err) {
+//     if(err){
+//         res.send(err);
+//     }
+//     res.json({ message: 'Bear created! with name: ' + bear.name });
+//   });
   
-});
+// });
