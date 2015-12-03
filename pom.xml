@@ -61,8 +61,8 @@
     <properties>
         <!--TODO check why 1.8 doesnt work on heroku-->
         <java.version>1.6</java.version>
+        <start-class>chakra.Application</start-class>
     </properties>
-
 
     <build>
         <plugins>
