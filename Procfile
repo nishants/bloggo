@@ -1,1 +1,1 @@
-web: node app.js
+web: java -Dserver.port=$PORT -jar target/chakra-0.1.0.jar
