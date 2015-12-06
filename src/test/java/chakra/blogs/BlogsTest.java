@@ -44,7 +44,11 @@ public class BlogsTest {
     blogParams.put("name", "aBlog");
     ResponseEntity<Map> response = template.postForEntity(atUrl("blogs"), blogParams, Map.class);
     assertThat(response.getStatusCode(), is(HttpStatus.OK));
-    assertThat(((Map)response.getBody().get("data")).get("name").toString(), is("aBlog"));
+    assertThat(((Map) response.getBody().get("data")).get("name").toString(), is("aBlog"));
+
+    ResponseEntity<Map> getResponse = template.getForEntity(atUrl("blogs/aBlog/"), Map.class);
+    assertThat(getResponse.getStatusCode(), is(HttpStatus.OK));
+    assertThat(((Map)getResponse.getBody().get("data")).get("name").toString(), is("aBlog"));
   }
 
   private String atUrl(String url) {

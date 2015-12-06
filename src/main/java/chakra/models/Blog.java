@@ -14,6 +14,7 @@ public class Blog {
   @Column(nullable = false)
   private String name;
 
+  protected Blog() {}
   public Blog(String name) {
     this.name = name;
   }

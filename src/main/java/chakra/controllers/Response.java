@@ -1,7 +1,7 @@
 package chakra.controllers;
 
-public class Data<T> {
-  public Data(T data){
+public class Response<T> {
+  public Response(T data){
     this.data = data;
   }
 
