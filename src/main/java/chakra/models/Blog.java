@@ -14,7 +14,9 @@ public class Blog {
   @Column(nullable = false)
   private String name;
 
-  public Blog(String name, String ignore) {
-    this.name = ignore;
+  public Blog(String name) {
+    this.name = name;
   }
+
+  public String getName(){return this.name;}
 }

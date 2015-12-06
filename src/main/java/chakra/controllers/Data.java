@@ -1,11 +1,5 @@
 package chakra.controllers;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
 public class Data<T> {
   public Data(T data){
     this.data = data;
