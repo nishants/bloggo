@@ -1,4 +1,4 @@
-package chakra.web;
+package chakra.controllers;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
