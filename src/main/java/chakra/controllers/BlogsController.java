@@ -21,7 +21,7 @@ public class BlogsController {
 
   @RequestMapping(method = POST)
   public Data<Blog> createBlog(@RequestBody Map params) {
-    return new Data<Blog>(new Blog(params.get("name").toString()));
+    return new Data<Blog>(repository.save(new Blog(params.get("name").toString())));
   }
 
   @RequestMapping(method = GET)
