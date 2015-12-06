@@ -3,6 +3,8 @@ package chakra.web;
 import chakra.compiler.CompilationResult;
 import chakra.compiler.Compiler;
 import chakra.compiler.InMemoryJavaFile;
+import chakra.models.Blog;
+import chakra.repositories.BlogRepository;
 import chakra.runner.ExecuteMainResult;
 import chakra.runner.ExecuteTestResult;
 import chakra.runner.MainRunner;
@@ -10,6 +12,7 @@ import chakra.runner.TestRunner;
 import chakra.web.request.ExecuteMainRequest;
 import chakra.web.request.ExecuteTestsRequest;
 import chakra.web.request.JavaFile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/runner")
 public class Server {
+
+  @Autowired
+  private BlogRepository repository;
+
+  @RequestMapping(value = "/blogs", method = GET)
+  public Data<Blog> getBlogs() {
+    return new Data<Blog>(repository.findAll().iterator().next(), null);
+  }
+
   @RequestMapping(value = "/main", method = POST)
   public Data<ExecuteMainResult> runMainMethod(@RequestBody Data<ExecuteMainRequest> request) {
     ExecuteMainRequest requestContent = request.getContent();
